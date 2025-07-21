@@ -18,6 +18,6 @@ button = QPushButton()
 # button.setText("Click me")
 button.setParent(window)
 button.show()
-button.connect(lambda: print("Button clicked"))
+button.connect(lambda checked: print("Button clicked"))
 
 app.exec_()
