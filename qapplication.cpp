@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <QApplication>
+#include <QMainWindow>
 
 namespace py = pybind11;
 
@@ -15,5 +16,9 @@ PYBIND11_MODULE(QtWidget, m) {
             int argc = static_cast<int>(argPtrs.size());
             return std::make_unique<QApplication>(argc, argPtrs.data());
         }))
-        .def("exec", &QApplication::exec);
+        .def("exec_", [](QApplication &self) { return self.exec(); });
+
+    py::class_<QMainWindow>(m, "QMainWindow")
+        .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
+        .def("show", [](QMainWindow &self) { return self.show(); });
 }
