@@ -16,9 +16,10 @@ PYBIND11_MODULE(QtWidgets, m) {
             int argc = static_cast<int>(argPtrs.size());
             return std::make_unique<QApplication>(argc, argPtrs.data());
         }))
-        .def("exec_", [](QApplication &self) { return self.exec(); });
+        .def("exec_", &QApplication::exec);
 
     py::class_<QMainWindow>(m, "QMainWindow")
         .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
-        .def("show", [](QMainWindow &self) { return self.show(); });
+        .def("show", &QMainWindow::show);
+
 }
