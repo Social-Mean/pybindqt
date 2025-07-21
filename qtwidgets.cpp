@@ -1,10 +1,17 @@
 #include <pybind11/pybind11.h>
 #include <QApplication>
 #include <QMainWindow>
+#include <QPushButton>
+#include <QWidget>
 
 namespace py = pybind11;
 
 PYBIND11_MODULE(QtWidgets, m) {
+    py::class_<QWidget>(m, "QWidget")
+        .def("setParent", py::overload_cast<QWidget *>(&QWidget::setParent))
+        .def("setParent", py::overload_cast<QWidget *, Qt::WindowFlags>(
+                              &QWidget::setParent));
+
     py::class_<QApplication>(m, "QApplication")
         .def(py::init([](py::list args) {
             std::vector<QByteArray> argData;
@@ -16,10 +23,17 @@ PYBIND11_MODULE(QtWidgets, m) {
             int argc = static_cast<int>(argPtrs.size());
             return std::make_unique<QApplication>(argc, argPtrs.data());
         }))
-        .def("exec_", &QApplication::exec);
+        .def("exec_", [](QApplication &self) { return self.exec(); });
 
-    py::class_<QMainWindow>(m, "QMainWindow")
+    py::class_<QMainWindow, QWidget>(m, "QMainWindow")
         .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
         .def("show", &QMainWindow::show);
 
+    py::class_<QPushButton, QWidget>(m, "QPushButton")
+        .def(py::init([]() { return std::make_unique<QPushButton>(); }))
+        .def("setText", &QPushButton::setText)
+        .def("show", &QPushButton::show)
+        .def("connect", [](QPushButton &self, py::function func) {
+            QObject::connect(&self, &QPushButton::clicked, func);
+        });
 }

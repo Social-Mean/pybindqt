@@ -7,10 +7,17 @@ import sys
 
 sys.path.append("D:/code/pybindqt/build/Release")
 
-from QtWidget import QApplication, QMainWindow
+from QtWidgets import QApplication, QMainWindow, QPushButton
 
 
 app = QApplication(["app"])
 window = QMainWindow()
 window.show()
+
+button = QPushButton()
+# button.setText("Click me")
+button.setParent(window)
+button.show()
+button.connect(lambda: print("Button clicked"))
+
 app.exec_()
