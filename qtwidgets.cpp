@@ -4,7 +4,7 @@
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(QtWidget, m) {
+PYBIND11_MODULE(QtWidgets, m) {
     py::class_<QApplication>(m, "QApplication")
         .def(py::init([](py::list args) {
             std::vector<QByteArray> argData;
