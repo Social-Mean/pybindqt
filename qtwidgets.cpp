@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QWidget>
+#include "CustomPushButton.h"
 
 namespace py = pybind11;
 
@@ -29,11 +30,9 @@ PYBIND11_MODULE(QtWidgets, m) {
         .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
         .def("show", &QMainWindow::show);
 
-    py::class_<QPushButton, QWidget>(m, "QPushButton")
-        .def(py::init([]() { return std::make_unique<QPushButton>(); }))
-        .def("setText", &QPushButton::setText)
-        .def("show", &QPushButton::show)
-        .def("connect", [](QPushButton &self, py::function func) {
-            QObject::connect(&self, &QPushButton::clicked, func);
-        });
+    py::class_<CustomPushButton, QWidget>(m, "QPushButton")
+        .def(py::init([]() { return std::make_unique<CustomPushButton>(); }))
+        .def("setText", &CustomPushButton::setText)
+        .def("show", &CustomPushButton::show)
+        .def_readonly("clicked", &CustomPushButton::clicked);
 }

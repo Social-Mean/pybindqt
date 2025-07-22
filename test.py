@@ -8,7 +8,7 @@ import sys
 sys.path.append("D:/code/pybindqt/build/Release")
 
 from QtWidgets import QApplication, QMainWindow, QPushButton
-
+from QtCore import Signal
 
 app = QApplication(["app"])
 window = QMainWindow()
@@ -18,6 +18,6 @@ button = QPushButton()
 # button.setText("Click me")
 button.setParent(window)
 button.show()
-button.connect(lambda checked: print("Button clicked"))
+button.clicked.connect(lambda checked: print("Button clicked"))
 
 app.exec_()
