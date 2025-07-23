@@ -1,4 +1,4 @@
-#include "pb_qushbutton.h"
+#include "pb_qpushbutton.h"
 #include <pybind11/pybind11.h>
 #include <memory>
 namespace py = pybind11;

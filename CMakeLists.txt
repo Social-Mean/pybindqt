@@ -22,7 +22,7 @@ target_link_libraries(Signal PRIVATE ${Python3_LIBRARIES}/python38.lib)
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
     widgets_base.cpp
-    pb_qushbutton.cpp
+    pb_qpushbutton.cpp
 )
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 target_link_libraries(QtWidgets PRIVATE Signal)
