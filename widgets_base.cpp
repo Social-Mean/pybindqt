@@ -5,14 +5,14 @@
 #include <pybind11/stl.h>
 #include <vector>
 
-void bind_qwidget(py::module_ &m) {
+void bind_widget(py::module_ &m) {
     py::class_<QWidget>(m, "QWidget")
         .def("setParent", py::overload_cast<QWidget *>(&QWidget::setParent))
         .def("setParent", py::overload_cast<QWidget *, Qt::WindowFlags>(
                               &QWidget::setParent));
 }
 
-void bind_qapplication(py::module_ &m) {
+void bind_application(py::module_ &m) {
     py::class_<QApplication>(m, "QApplication")
         .def(py::init([](py::list args) {
             std::vector<QByteArray> argData;
@@ -27,7 +27,7 @@ void bind_qapplication(py::module_ &m) {
         .def("exec_", [](QApplication &self) { return self.exec(); });
 }
 
-void bind_qmainwindow(py::module_ &m) {
+void bind_mainwindow(py::module_ &m) {
     py::class_<QMainWindow, QWidget>(m, "QMainWindow")
         .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
         .def("show", &QMainWindow::show);

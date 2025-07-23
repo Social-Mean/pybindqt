@@ -3,7 +3,7 @@
 #include <pybind11/pybind11.h>
 #include <memory>
 
-void bind_qpushbutton(py::module_ &m) {
+void bind_pushbutton(py::module_ &m) {
     py::class_<CustomPushButton, QWidget>(m, "QPushButton")
         .def(py::init([]() { return std::make_unique<CustomPushButton>(); }))
         .def("setText", &CustomPushButton::setText)
