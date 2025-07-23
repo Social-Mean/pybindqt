@@ -1,0 +1,34 @@
+#include "widgets_base.h"
+#include <QWidget>
+#include <QApplication>
+#include <QMainWindow>
+#include <pybind11/stl.h>
+#include <vector>
+
+void bind_qwidget(py::module_ &m) {
+    py::class_<QWidget>(m, "QWidget")
+        .def("setParent", py::overload_cast<QWidget *>(&QWidget::setParent))
+        .def("setParent", py::overload_cast<QWidget *, Qt::WindowFlags>(
+                              &QWidget::setParent));
+}
+
+void bind_qapplication(py::module_ &m) {
+    py::class_<QApplication>(m, "QApplication")
+        .def(py::init([](py::list args) {
+            std::vector<QByteArray> argData;
+            std::vector<char *> argPtrs;
+            for (auto item : args) {
+                argData.emplace_back(py::str(item).cast<std::string>().c_str());
+                argPtrs.push_back(const_cast<char *>(argData.back().data()));
+            }
+            int argc = static_cast<int>(argPtrs.size());
+            return std::make_unique<QApplication>(argc, argPtrs.data());
+        }))
+        .def("exec_", [](QApplication &self) { return self.exec(); });
+}
+
+void bind_qmainwindow(py::module_ &m) {
+    py::class_<QMainWindow, QWidget>(m, "QMainWindow")
+        .def(py::init([]() { return std::make_unique<QMainWindow>(); }))
+        .def("show", &QMainWindow::show);
+}

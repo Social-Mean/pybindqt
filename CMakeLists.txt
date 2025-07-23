@@ -21,7 +21,11 @@ target_link_libraries(CustomPushButton PRIVATE Signal Qt5::Widgets)
 target_link_libraries(CustomPushButton PRIVATE ${Python3_LIBRARIES}/python38.lib)
 
 
-pybind11_add_module(QtWidgets qtwidgets.cpp)
+pybind11_add_module(QtWidgets
+    qtwidgets.cpp
+    widgets_base.cpp
+    widgets_buttons.cpp
+)
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 target_link_libraries(QtWidgets PRIVATE Signal CustomPushButton)
 
