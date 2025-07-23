@@ -16,18 +16,19 @@ target_link_libraries(Signal PUBLIC pybind11::pybind11)
 target_link_libraries(Signal PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 target_link_libraries(Signal PRIVATE ${Python3_LIBRARIES}/python38.lib)
 
-add_library(CustomPushButton STATIC CustomPushButton.cpp)
-target_link_libraries(CustomPushButton PRIVATE Signal Qt5::Widgets)
-target_link_libraries(CustomPushButton PRIVATE ${Python3_LIBRARIES}/python38.lib)
-
-
+# add_library(CustomPushButton STATIC CustomPushButton.cpp)
+# target_link_libraries(CustomPushButton PRIVATE Signal Qt5::Widgets)
+# target_link_libraries(CustomPushButton PRIVATE ${Python3_LIBRARIES}/python38.lib)
 pybind11_add_module(QtWidgets
+    pwidget.cpp
     qtwidgets.cpp
     widgets_base.cpp
-    widgets_buttons.cpp
+    CustomPushButton.cpp
+
+    # widgets_buttons.cpp
 )
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
-target_link_libraries(QtWidgets PRIVATE Signal CustomPushButton)
+target_link_libraries(QtWidgets PRIVATE Signal)
 
 pybind11_add_module(QtCore qtcore.cpp)
 target_link_libraries(QtCore PRIVATE Qt5::Core)
