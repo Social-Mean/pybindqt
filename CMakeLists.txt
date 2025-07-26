@@ -34,6 +34,7 @@ pybind11_add_module(QtWidgets
     bind_qwidget.cpp
     bind_qapplication.cpp
     bind_qmainwindow.cpp
+    bind_qobject.cpp
 )
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 
