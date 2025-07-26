@@ -1,7 +1,7 @@
 #include <pybind11/stl.h>
 
-#include "widgets_base.h"
 #include <QApplication>
+namespace py = pybind11;
 
 void bind_qapplication(py::module_ &m) {
   py::class_<QApplication>(m, "QApplication")

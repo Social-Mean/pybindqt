@@ -1,7 +1,7 @@
 #include <pybind11/stl.h>
 
-#include "widgets_base.h"
 #include <QWidget>
+namespace py = pybind11;
 
 void bind_qwidget(py::module_ &m) {
   py::class_<QWidget>(m, "QWidget")
