@@ -1,8 +1,8 @@
+#include <pybind11/stl.h>
 #include "widgets_base.h"
 #include <QWidget>
 #include <QApplication>
 #include <QMainWindow>
-#include <pybind11/stl.h>
 #include <vector>
 
 void bind_widget(py::module_ &m) {

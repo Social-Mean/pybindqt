@@ -1,6 +1,8 @@
-#include "pb_qpushbutton.h"
 #include <pybind11/pybind11.h>
+
+#include "pb_qpushbutton.h"
 #include <memory>
+
 namespace py = pybind11;
 
 PB_QPushButton::PB_QPushButton(QWidget *parent)
