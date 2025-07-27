@@ -9,5 +9,5 @@ PYBIND11_MODULE(QtWidgets, m) {
   bind_qwidget(m);
   bind_qapplication(m);
   bind_qmainwindow(m);
-  // bind_pushbutton(m);
+  bind_qpushbutton(m);
 }
