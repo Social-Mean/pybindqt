@@ -8,3 +8,6 @@ dependencies = [
     "mypy>=1.14.1",
     "pybind11>=3.0.0",
 ]
+
+[tool.ty.environment]
+extra-paths = ["./build"]
