@@ -1,11 +1,10 @@
 import os
-
-os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = (
-    "C:/code/gallop-bin/3rd/qt5.15.2/plugins/platforms"
-)
 import sys
 
-sys.path.append("C:/code/pybindqt/build/")
+qt_dir = os.environ["QTDIR"]
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = f"{qt_dir}/plugins/platforms"
+
+sys.path.append("./build/")
 
 from QtWidgets import QApplication, QMainWindow  # , QPushButton
 # from QtCore import Signal
