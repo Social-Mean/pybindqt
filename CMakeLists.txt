@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.27)
 
 project(pybindqt)
 
+if(MSVC)
+    # 对于Visual Studio编译器
+    add_compile_options(/utf-8)
+endif()
+
 # 设置虚拟环境路径
 set(VENV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.venv")
 set(VENV_PYTHON "${VENV_DIR}/Scripts/python.exe")
