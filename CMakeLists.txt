@@ -53,6 +53,38 @@ target_link_libraries(QtWidgets PRIVATE Signal)
 # target_link_libraries(QtCore PRIVATE Qt5::Core)
 # target_link_libraries(QtCore PRIVATE Signal)
 
+# Windows 平台特定的部署和生成命令
+if(WIN32)
+    # 先从环境变量 QTDIR 获取 windeployqt.exe 路径
+    if(DEFINED ENV{QTDIR})
+        set(WINDEPLOYQT_EXE "$ENV{QTDIR}/bin/windeployqt.exe")
+    else()
+        message(FATAL_ERROR "环境变量 QTDIR 未设置，无法找到 windeployqt.exe")
+    endif()
+
+    # 获取 QtWidgets 模块的实际输出文件名
+    get_target_property(QTWIDGETS_OUTPUT_NAME QtWidgets OUTPUT_NAME)
+    if(NOT QTWIDGETS_OUTPUT_NAME)
+        set(QTWIDGETS_OUTPUT_NAME "QtWidgets")
+    endif()
+
+    # 部署 QtWidgets
+    add_custom_command(
+        TARGET QtWidgets POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo "windeployqt..."
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets>
+        COMMENT "编译后自动运行 windeployqt 部署 QtWidgets"
+    )
+
+    # 生成 stub 文件
+    add_custom_command(
+        TARGET QtWidgets POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E echo "生成 stub 文件..."
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} uv run stubgen -p QtWidgets --include-docstrings -o .
+        COMMENT "编译后自动生成 QtWidgets 的 stub 文件"
+    )
+endif()
+
 
 
 
