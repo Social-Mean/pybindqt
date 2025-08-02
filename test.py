@@ -13,8 +13,7 @@ window.show()
 
 button = QPushButton()
 button.setParent(window)
-# QObject.connect(button, "clicked()", button, 'setText("clicked")')
-QObject.connect(button, QPushButton.clicked, button, lambda checked: print("clicked"))
+button.clicked.connect(lambda checked: print("clicked"))
 button.show()
 
 print("text:", button.text())
