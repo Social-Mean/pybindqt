@@ -13,6 +13,7 @@ window.show()
 
 button = QPushButton()
 button.setParent(window)
+button.setText("Hello")
 button.clicked.connect(lambda checked: print("clicked"))
 button.show()
 

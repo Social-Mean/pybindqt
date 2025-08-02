@@ -20,7 +20,10 @@ void bind_qpushbutton(py::module_ &m) {
   py::class_<QPushButton, QWidget>(m, "QPushButton")
       .def(py::init([]() { return std::make_unique<QPushButton>(); }))
       .def("show", &QPushButton::show)
-      .def("setText", &QPushButton::setText)
+      .def("setText",
+           [](QPushButton *self, const std::string &text) {
+             self->setText(QString::fromStdString(text));
+           })
       .def("text", [](QPushButton *self) { return self->text().toStdString(); })
       .def("setGeometry", [](QPushButton *self, int x, int y, int w,
                              int h) { self->setGeometry(x, y, w, h); })
