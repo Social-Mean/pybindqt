@@ -14,8 +14,10 @@ void bind_qobject(py::module_ &m) {
   py::class_<QObject>(m, "QObject")
       .def_property_readonly("objectName",
                              [](QObject *self) { return self->objectName(); })
-      .def(py::init(
-          [](QObject *parent) { return std::make_unique<QObject>(parent); }))
+      .def(py::init([](QObject *parent) {
+             return std::make_unique<QObject>(parent);
+           }),
+           py::arg("parent") = nullptr)
       .def("blockSignals", &QObject::blockSignals)
       .def("children", &QObject::children)
       //   .def("connect", &QObject::connect)
