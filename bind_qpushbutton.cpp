@@ -19,6 +19,9 @@ void bind_qpushbutton(py::module_ &m) {
 
   py::class_<QPushButton, QWidget>(m, "QPushButton")
       .def(py::init([]() { return std::make_unique<QPushButton>(); }))
+      .def(py::init([](QWidget *parent) {
+        return std::make_unique<QPushButton>(parent);
+      }))
       .def("show", &QPushButton::show)
       .def("setText",
            [](QPushButton *self, const std::string &text) {
