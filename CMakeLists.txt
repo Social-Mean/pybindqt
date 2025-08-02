@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.27)
 
 project(pybindqt)
 
+if(MSVC)
+    # 对于Visual Studio编译器
+    add_compile_options(/utf-8)
+endif()
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 # 设置虚拟环境路径
 set(VENV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.venv")
 set(VENV_PYTHON "${VENV_DIR}/Scripts/python.exe")
@@ -34,6 +43,8 @@ pybind11_add_module(QtWidgets
     bind_qwidget.cpp
     bind_qapplication.cpp
     bind_qmainwindow.cpp
+    bind_qobject.cpp
+    bind_qpushbutton.cpp
 )
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 
