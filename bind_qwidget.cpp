@@ -89,6 +89,56 @@ void bind_qwidget(py::module_ &m) {
           [](QWidget *self) { return self->normalGeometry(); })
       .def_property_readonly("palette",
                              [](QWidget *self) { return self->palette(); })
+      .def_property_readonly("pos", [](QWidget *self) { return self->pos(); })
+      .def_property_readonly("rect", [](QWidget *self) { return self->rect(); })
+      .def_property_readonly("size", [](QWidget *self) { return self->size(); })
+      .def_property_readonly("sizeHint",
+                             [](QWidget *self) { return self->sizeHint(); })
+      .def_property_readonly(
+          "sizeIncrement", [](QWidget *self) { return self->sizeIncrement(); })
+      .def_property_readonly("sizePolicy",
+                             [](QWidget *self) { return self->sizePolicy(); })
+      .def_property_readonly("statusTip",
+                             [](QWidget *self) { return self->statusTip(); })
+      .def_property_readonly("styleSheet",
+                             [](QWidget *self) { return self->styleSheet(); })
+      //   .def_property_readonly(
+      //       "tabletTracking",
+      //       [](QWidget *self) { return self->tabletTracking(); })
+      .def_property_readonly("toolTip",
+                             [](QWidget *self) { return self->toolTip(); })
+      .def_property_readonly(
+          "toolTipDuration",
+          [](QWidget *self) { return self->toolTipDuration(); })
+      .def_property_readonly(
+          "updatesEnabled",
+          [](QWidget *self) { return self->updatesEnabled(); })
+      //   .def_property_readonly("visible",
+      //                          [](QWidget *self) { return self->visible(); })
+      .def_property_readonly("whatsThis",
+                             [](QWidget *self) { return self->whatsThis(); })
+      .def_property_readonly("width",
+                             [](QWidget *self) { return self->width(); })
+      .def_property_readonly(
+          "windowFilePath",
+          [](QWidget *self) { return self->windowFilePath(); })
+      .def_property_readonly("windowFlags",
+                             [](QWidget *self) { return self->windowFlags(); })
+      //   .def_property_readonly("windowIcon",
+      //                          [](QWidget *self) { return self->windowIcon();
+      //                          })
+      .def_property_readonly(
+          "windowModality",
+          [](QWidget *self) { return self->windowModality(); })
+      //   .def_property_readonly(
+      //       "windowModified",
+      //       [](QWidget *self) { return self->windowModified(); })
+      .def_property_readonly(
+          "windowOpacity", [](QWidget *self) { return self->windowOpacity(); })
+      .def_property_readonly("windowTitle",
+                             [](QWidget *self) { return self->windowTitle(); })
+      .def_property_readonly("x", [](QWidget *self) { return self->x(); })
+      .def_property_readonly("y", [](QWidget *self) { return self->y(); })
 
       ;
 }
