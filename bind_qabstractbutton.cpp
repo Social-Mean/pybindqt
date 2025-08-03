@@ -32,5 +32,12 @@ void bind_qabstractbutton(py::module_ &m) {
            })
       .def("shortcut", &QAbstractButton::shortcut)
       .def("text",
-           [](QAbstractButton *self) { return self->text().toStdString(); });
+           [](QAbstractButton *self) { return self->text().toStdString(); })
+      .def("animateClick", &QAbstractButton::animateClick)
+      .def("click", &QAbstractButton::click)
+      .def("setChecked", &QAbstractButton::setChecked)
+      .def("setIconSize", &QAbstractButton::setIconSize)
+      .def("toggle", &QAbstractButton::toggle)
+
+      ;
 }
