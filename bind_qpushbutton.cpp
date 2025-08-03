@@ -1,8 +1,11 @@
 #include <pybind11/pybind11.h>
 
+#include <QButtonGroup>
+#include <QMenu>
 #include <QObject>
 #include <QPushButton>
 #include <QWidget>
+
 
 #include "signal.h"
 
@@ -17,19 +20,32 @@ void bind_qpushbutton(py::module_ &m) {
     return Clicked(self);
   }));
 
-  py::class_<QPushButton, QWidget>(m, "QPushButton")
-      .def(py::init([]() { return std::make_unique<QPushButton>(); }))
+  py::class_<QPushButton, QAbstractButton>(m, "QPushButton")
       .def(py::init([](QWidget *parent) {
-        return std::make_unique<QPushButton>(parent);
-      }))
-      .def("show", &QPushButton::show)
-      .def("setText",
-           [](QPushButton *self, const std::string &text) {
-             self->setText(QString::fromStdString(text));
-           })
-      .def("text", [](QPushButton *self) { return self->text().toStdString(); })
-      .def("setGeometry", [](QPushButton *self, int x, int y, int w,
-                             int h) { self->setGeometry(x, y, w, h); })
+             return std::make_unique<QPushButton>(parent);
+           }),
+           py::arg("parent") = nullptr)
+      .def(py::init([](const QString &text, QWidget *parent) {
+             return std::make_unique<QPushButton>(text, parent);
+           }),
+           py::arg("text"), py::arg("parent") = nullptr)
+      .def(
+          py::init([](const QIcon &icon, const QString &text, QWidget *parent) {
+            return std::make_unique<QPushButton>(icon, text, parent);
+          }),
+          py::arg("icon"), py::arg("text"), py::arg("parent") = nullptr)
+      .def("autoDefault", &QPushButton::autoDefault)
+      .def("isDefault", &QPushButton::isDefault)
+      .def("isFlat", &QPushButton::isFlat)
+      .def("menu", &QPushButton::menu)
+      .def("setAutoDefault", &QPushButton::setAutoDefault)
+      .def("setDefault", &QPushButton::setDefault)
+      .def("setFlat", &QPushButton::setFlat)
+      .def("setMenu", &QPushButton::setMenu)
+
+      //   .def("minimumSizeHint", &QPushButton::minimumSizeHint)
+      //   .def("sizeHint", &QPushButton::sizeHint)
+
       // 添加clicked信号作为静态属性
       .def_property_readonly("clicked",
                              [](QPushButton *self) { return Clicked(self); });
