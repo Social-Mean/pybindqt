@@ -35,6 +35,55 @@ public:
   }
 };
 
+class CustomContextMenuRequested : public Signal {
+public:
+  CustomContextMenuRequested(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QWidget *widget = qobject_cast<QWidget *>(get_obj());
+    if (widget) {
+      QObject::connect(widget, &QWidget::customContextMenuRequested,
+                       [slot_func](const QPoint &pos) { slot_func(pos); });
+    }
+  }
+};
+
+class WindowIconChanged : public Signal {
+public:
+  WindowIconChanged(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QWidget *widget = qobject_cast<QWidget *>(get_obj());
+    if (widget) {
+      QObject::connect(widget, &QWidget::windowIconChanged,
+                       [slot_func](const QIcon &icon) { slot_func(icon); });
+    }
+  }
+};
+
+class WindowIconTextChanged : public Signal {
+public:
+  WindowIconTextChanged(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QWidget *widget = qobject_cast<QWidget *>(get_obj());
+    if (widget) {
+      QObject::connect(
+          widget, &QWidget::windowIconTextChanged,
+          [slot_func](const QString &iconText) { slot_func(iconText); });
+    }
+  }
+};
+
+class WindowTitleChanged : public Signal {
+public:
+  WindowTitleChanged(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QWidget *widget = qobject_cast<QWidget *>(get_obj());
+    if (widget) {
+      QObject::connect(widget, &QWidget::windowTitleChanged,
+                       [slot_func](const QString &title) { slot_func(title); });
+    }
+  }
+};
+
 class Clicked : public Signal {
 public:
   Clicked(QObject *obj) : Signal(obj) {}

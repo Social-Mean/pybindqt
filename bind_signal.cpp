@@ -16,6 +16,20 @@ void bind_signal(py::module_ &m) {
   py::class_<ObjectNameChanged, Signal>(m, "ObjectNameChanged")
       .def(py::init([](QObject *self) { return ObjectNameChanged(self); }));
 
+  py::class_<CustomContextMenuRequested, Signal>(m,
+                                                 "CustomContextMenuRequested")
+      .def(py::init(
+          [](QWidget *self) { return CustomContextMenuRequested(self); }));
+
+  py::class_<WindowIconChanged, Signal>(m, "WindowIconChanged")
+      .def(py::init([](QWidget *self) { return WindowIconChanged(self); }));
+
+  py::class_<WindowIconTextChanged, Signal>(m, "WindowIconTextChanged")
+      .def(py::init([](QWidget *self) { return WindowIconTextChanged(self); }));
+
+  py::class_<WindowTitleChanged, Signal>(m, "WindowTitleChanged")
+      .def(py::init([](QWidget *self) { return WindowTitleChanged(self); }));
+
   py::class_<Clicked, Signal>(m, "Clicked").def(py::init([](QPushButton *self) {
     return Clicked(self);
   }));
