@@ -95,3 +95,39 @@ public:
     }
   }
 };
+
+class Pressed : public Signal {
+public:
+  Pressed(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    if (button) {
+      QObject::connect(button, &QPushButton::pressed,
+                       [slot_func]() { slot_func(); });
+    }
+  }
+};
+
+class Released : public Signal {
+public:
+  Released(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    if (button) {
+      QObject::connect(button, &QPushButton::released,
+                       [slot_func]() { slot_func(); });
+    }
+  }
+};
+
+class Toggled : public Signal {
+public:
+  Toggled(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    if (button) {
+      QObject::connect(button, &QPushButton::toggled,
+                       [slot_func](bool checked) { slot_func(checked); });
+    }
+  }
+};

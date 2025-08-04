@@ -33,4 +33,15 @@ void bind_signal(py::module_ &m) {
   py::class_<Clicked, Signal>(m, "Clicked").def(py::init([](QPushButton *self) {
     return Clicked(self);
   }));
+
+  py::class_<Pressed, Signal>(m, "Pressed").def(py::init([](QPushButton *self) {
+    return Pressed(self);
+  }));
+
+  py::class_<Released, Signal>(m, "Released")
+      .def(py::init([](QPushButton *self) { return Released(self); }));
+
+  py::class_<Toggled, Signal>(m, "Toggled").def(py::init([](QPushButton *self) {
+    return Toggled(self);
+  }));
 }

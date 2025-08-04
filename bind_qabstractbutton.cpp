@@ -37,5 +37,13 @@ void bind_qabstractbutton(py::module_ &m) {
       .def("setIconSize", &QAbstractButton::setIconSize)
       .def("toggle", &QAbstractButton::toggle)
 
-      ;
+      // 添加信号作为静态属性
+      .def_property_readonly(
+          "clicked", [](QAbstractButton *self) { return Clicked(self); })
+      .def_property_readonly(
+          "pressed", [](QAbstractButton *self) { return Pressed(self); })
+      .def_property_readonly(
+          "released", [](QAbstractButton *self) { return Released(self); })
+      .def_property_readonly(
+          "toggled", [](QAbstractButton *self) { return Toggled(self); });
 }

@@ -32,12 +32,8 @@ void bind_qpushbutton(py::module_ &m) {
       .def("setAutoDefault", &QPushButton::setAutoDefault)
       .def("setDefault", &QPushButton::setDefault)
       .def("setFlat", &QPushButton::setFlat)
-      .def("setMenu", &QPushButton::setMenu)
+      .def("setMenu", &QPushButton::setMenu);
 
-      //   .def("minimumSizeHint", &QPushButton::minimumSizeHint)
-      //   .def("sizeHint", &QPushButton::sizeHint)
-
-      // 添加clicked信号作为静态属性
-      .def_property_readonly("clicked",
-                             [](QPushButton *self) { return Clicked(self); });
+  //   .def("minimumSizeHint", &QPushButton::minimumSizeHint)
+  //   .def("sizeHint", &QPushButton::sizeHint)
 }
