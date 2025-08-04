@@ -16,24 +16,27 @@ namespace py = pybind11;
 
 void bind_qmainwindow(py::module_ &m) {
   py::class_<QMainWindow, QWidget>(m, "QMainWindow")
-      .def_property("animated", &QMainWindow::isAnimated,
-                    &QMainWindow::setAnimated)
-      .def_property("dockNestingEnabled", &QMainWindow::isDockNestingEnabled,
-                    &QMainWindow::setDockNestingEnabled)
-      .def_property("dockOptions", &QMainWindow::dockOptions,
-                    &QMainWindow::setDockOptions)
-      .def_property("documentMode", &QMainWindow::documentMode,
-                    &QMainWindow::setDocumentMode)
-      .def_property("iconSize", &QMainWindow::iconSize,
-                    &QMainWindow::setIconSize)
-      .def_property("tabShape", &QMainWindow::tabShape,
-                    &QMainWindow::setTabShape)
-      .def_property("toolButtonStyle", &QMainWindow::toolButtonStyle,
-                    &QMainWindow::setToolButtonStyle)
-      .def_property("unifiedTitleAndToolBarOnMac",
-                    &QMainWindow::unifiedTitleAndToolBarOnMac,
-                    &QMainWindow::setUnifiedTitleAndToolBarOnMac)
+      // property
+      //    .def_property("animated", &QMainWindow::isAnimated,
+      //                  &QMainWindow::setAnimated)
+      //    .def_property("dockNestingEnabled",
+      //    &QMainWindow::isDockNestingEnabled,
+      //                  &QMainWindow::setDockNestingEnabled)
+      //    .def_property("dockOptions", &QMainWindow::dockOptions,
+      //                  &QMainWindow::setDockOptions)
+      //    .def_property("documentMode", &QMainWindow::documentMode,
+      //                  &QMainWindow::setDocumentMode)
+      //    .def_property("iconSize", &QMainWindow::iconSize,
+      //                  &QMainWindow::setIconSize)
+      //    .def_property("tabShape", &QMainWindow::tabShape,
+      //                  &QMainWindow::setTabShape)
+      //    .def_property("toolButtonStyle", &QMainWindow::toolButtonStyle,
+      //                  &QMainWindow::setToolButtonStyle)
+      //    .def_property("unifiedTitleAndToolBarOnMac",
+      //                  &QMainWindow::unifiedTitleAndToolBarOnMac,
+      //                  &QMainWindow::setUnifiedTitleAndToolBarOnMac)
 
+      // function
       .def(py::init<QWidget *, Qt::WindowFlags>(), py::arg("parent") = nullptr,
            py::arg("flags") = Qt::WindowFlags())
       .def("show", &QMainWindow::show)
@@ -106,6 +109,7 @@ void bind_qmainwindow(py::module_ &m) {
       .def("unifiedTitleAndToolBarOnMac",
            &QMainWindow::unifiedTitleAndToolBarOnMac)
 
+      // slot
       .def("setAnimated", &QMainWindow::setAnimated, py::arg("enabled"))
       .def("setDockNestingEnabled", &QMainWindow::setDockNestingEnabled,
            py::arg("enabled"))

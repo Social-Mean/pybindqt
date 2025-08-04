@@ -54,4 +54,14 @@ void bind_enum(py::module_ &m) {
       .value("NoDropShadowWindowHint", Qt::NoDropShadowWindowHint)
       .value("WindowFullscreenButtonHint", Qt::WindowFullscreenButtonHint)
       .export_values();
+
+  py::enum_<Qt::ToolBarArea>(m, "ToolBarArea")
+      .value("LeftToolBarArea", Qt::LeftToolBarArea)
+      .value("RightToolBarArea", Qt::RightToolBarArea)
+      .value("TopToolBarArea", Qt::TopToolBarArea)
+      .value("BottomToolBarArea", Qt::BottomToolBarArea)
+      .value("ToolBarArea_Mask", Qt::ToolBarArea_Mask)
+      .value("AllToolBarAreas", Qt::AllToolBarAreas)
+      .value("NoToolBarArea", Qt::NoToolBarArea)
+      .export_values();
 }
