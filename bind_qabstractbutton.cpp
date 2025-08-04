@@ -4,6 +4,8 @@
 #include <QButtonGroup>
 #include <qabstractbutton.h>
 
+#include "qstring_converter.h"
+
 namespace py = pybind11;
 
 void bind_qabstractbutton(py::module_ &m) {
@@ -26,13 +28,9 @@ void bind_qabstractbutton(py::module_ &m) {
       .def("setDown", &QAbstractButton::setDown)
       .def("setIcon", &QAbstractButton::setIcon)
       .def("setShortcut", &QAbstractButton::setShortcut)
-      .def("setText",
-           [](QAbstractButton *self, const std::string &text) {
-             self->setText(QString::fromStdString(text));
-           })
+      .def("setText", &QAbstractButton::setText)
       .def("shortcut", &QAbstractButton::shortcut)
-      .def("text",
-           [](QAbstractButton *self) { return self->text().toStdString(); })
+      .def("text", &QAbstractButton::text)
       .def("animateClick", &QAbstractButton::animateClick)
       .def("click", &QAbstractButton::click)
       .def("setChecked", &QAbstractButton::setChecked)
