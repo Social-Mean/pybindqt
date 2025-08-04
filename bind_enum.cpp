@@ -2,6 +2,8 @@
 
 #include <QTimer>
 
+#include "widgets_base.h"
+
 namespace py = pybind11;
 
 void bind_enum(py::module_ &m) {

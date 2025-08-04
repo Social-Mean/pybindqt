@@ -6,8 +6,7 @@
 #include <QPushButton>
 #include <QWidget>
 
-
-#include "signal.h"
+#include "widgets_base.h"
 
 namespace py = pybind11;
 

@@ -4,7 +4,7 @@
 #include <QButtonGroup>
 #include <qabstractbutton.h>
 
-#include "qstring_converter.h"
+#include "widgets_base.h"
 
 namespace py = pybind11;
 

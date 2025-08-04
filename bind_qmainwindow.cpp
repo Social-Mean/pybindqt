@@ -10,7 +10,7 @@
 #include <QWidget>
 #include <Qt>
 
-#include "qstring_converter.h"
+#include "widgets_base.h"
 
 namespace py = pybind11;
 
