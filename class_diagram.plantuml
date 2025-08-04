@@ -1,0 +1,62 @@
+@startuml class_diagram
+
+class QObject {
+    -- properties --
+    +QString objectName() const
+    -- functions --
+    +QObject(QObject *parent = nullptr)
+    +~QObject()
+    +QBindable<QString> bindableObjectName()
+    +bool blockSignals(bool block)
+    +const QObjectList &children() const
+    +QMetaObject::Connection connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type = Qt::AutoConnection) const
+    +bool disconnect(const QObject *receiver, const char *method = nullptr) const
+    +bool disconnect(const char *signal = nullptr, const QObject *receiver = nullptr, const char *method = nullptr) const
+    +void dumpObjectInfo() const
+    +void dumpObjectTree() const
+    +QList<QByteArray> dynamicPropertyNames() const
+    +virtual bool event(QEvent *e)
+    +virtual bool eventFilter(QObject *watched, QEvent *event)
+    +T findChild(QAnyStringView name, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+    +T findChild(Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+    +QList<T> findChildren(QAnyStringView name, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+    +QList<T> findChildren(Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+    +QList<T> findChildren(const QRegularExpression &re, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+    +bool inherits(const char *className) const
+    +void installEventFilter(QObject *filterObj)
+    +bool isQuickItemType() const
+    +bool isWidgetType() const
+    +bool isWindowType() const
+    +void killTimer(int id)
+    +void killTimer(Qt::TimerId id)
+    +virtual const QMetaObject *metaObject() const
+    +bool moveToThread(QThread *targetThread)
+    +QString objectName() const
+    +QObject *parent() const
+    +QVariant property(const char *name) const
+    +void removeEventFilter(QObject *obj)
+    +void setObjectName(const QString &name)
+    +void setObjectName(QAnyStringView name)
+    +void setParent(QObject *parent)
+    +bool setProperty(const char *name, const QVariant &value)
+    +bool setProperty(const char *name, QVariant &&value)
+    +bool signalsBlocked() const
+    +int startTimer(int interval, Qt::TimerType timerType = Qt::CoarseTimer)
+    +int startTimer(std::chrono::nanoseconds interval, Qt::TimerType timerType = Qt::CoarseTimer)
+    +QThread *thread() const
+    -- slots --
+    +void deleteLater()
+    -- signals --
+    +void destroyed(QObject *obj = 0)
+    +void objectNameChanged(const QString &objectName)
+}
+
+class QWidget
+class QAbstractButton
+class QPushButton
+
+QObject <|-- QWidget
+QWidget <|-- QAbstractButton
+QAbstractButton <|-- QPushButton
+
+@enduml
