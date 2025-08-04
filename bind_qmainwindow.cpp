@@ -1,7 +1,17 @@
 #include <pybind11/pybind11.h>
 
+#include <QDockWidget>
 #include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QStatusBar>
+#include <QString>
+#include <QToolBar>
 #include <QWidget>
+#include <Qt>
+
+#include "qstring_converter.h"
+
 namespace py = pybind11;
 
 void bind_qmainwindow(py::module_ &m) {
