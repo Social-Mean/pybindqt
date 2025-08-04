@@ -6,6 +6,7 @@ namespace py = pybind11;
 }
 
 void bind_enum(py::module_ &m);
+void bind_qstring(py::module_ &m);
 void bind_qobject(py::module_ &m);
 void bind_qwidget(py::module_ &m);
 void bind_qapplication(py::module_ &m);
