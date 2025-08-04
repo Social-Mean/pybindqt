@@ -41,6 +41,7 @@ link_directories(${Python3_LIBRARIES}/python38.lib)
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
     bind_qstring.cpp
+    bind_qflags.cpp
     bind_qwidget.cpp
     bind_qapplication.cpp
     bind_qmainwindow.cpp
