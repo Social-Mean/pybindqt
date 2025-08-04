@@ -5,6 +5,7 @@
 namespace py = pybind11;
 
 PYBIND11_MODULE(QtWidgets, m) {
+  bind_signal(m);
   bind_enum(m);
   bind_qflags(m);
   bind_qstring(m);

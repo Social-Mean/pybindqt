@@ -11,14 +11,6 @@
 namespace py = pybind11;
 
 void bind_qpushbutton(py::module_ &m) {
-  // 绑定Signal类
-  py::class_<Signal>(m, "Signal")
-      .def(py::init([](QObject *self) { return Signal(self); }))
-      .def("connect", &Signal::connect);
-  py::class_<Clicked, Signal>(m, "Clicked").def(py::init([](QPushButton *self) {
-    return Clicked(self);
-  }));
-
   py::class_<QPushButton, QAbstractButton>(m, "QPushButton")
       .def(py::init([](QWidget *parent) {
              return std::make_unique<QPushButton>(parent);

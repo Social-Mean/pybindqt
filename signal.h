@@ -19,6 +19,22 @@ private:
   QObject *m_obj;
 };
 
+class Destroyed : public Signal {
+public:
+  Destroyed(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QObject::connect(get_obj(), &QObject::destroyed, slot_func);
+  }
+};
+
+class ObjectNameChanged : public Signal {
+public:
+  ObjectNameChanged(QObject *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QObject::connect(get_obj(), &QObject::objectNameChanged, slot_func);
+  }
+};
+
 class Clicked : public Signal {
 public:
   Clicked(QObject *obj) : Signal(obj) {}
