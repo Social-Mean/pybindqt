@@ -48,7 +48,7 @@ pybind11_add_module(QtWidgets
     bind_qpushbutton.cpp
 )
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
-
+target_compile_definitions(QtWidgets PRIVATE PYBIND11_DETAILED_ERROR_MESSAGES)
 # Windows 平台特定的部署和生成命令
 if(WIN32)
     # 先从环境变量 QTDIR 获取 windeployqt.exe 路径
