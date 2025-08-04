@@ -72,5 +72,12 @@ void bind_qobject(py::module_ &m) {
       // slots
       .def("deleteLater", &QObject::deleteLater)
 
-      ;
+      // signals
+      .def_property_readonly("destroyed",
+                             [](QObject *self) { return Destroyed(self); })
+      .def_property_readonly("objectNameChanged", [](QObject *self) {
+        return ObjectNameChanged(self)
+
+            ;
+      });
 }

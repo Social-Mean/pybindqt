@@ -463,5 +463,18 @@ void bind_qwidget(py::module_ &m) {
       .def("showFullScreen", &QWidget::showFullScreen)
       .def("update", py::overload_cast<>(&QWidget::update))
 
+      .def_property_readonly(
+          "customContextMenuRequested",
+          [](QWidget *self) { return CustomContextMenuRequested(self); })
+      .def_property_readonly(
+          "windowIconChanged",
+          [](QWidget *self) { return WindowIconChanged(self); })
+      .def_property_readonly(
+          "windowIconTextChanged",
+          [](QWidget *self) { return WindowIconTextChanged(self); })
+      .def_property_readonly(
+          "windowTitleChanged",
+          [](QWidget *self) { return WindowTitleChanged(self); })
+
       ;
 }
