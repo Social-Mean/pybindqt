@@ -2,6 +2,7 @@
 
 #include <pybind11/pybind11.h>
 
+#include <QMainWindow>
 #include <QObject>
 #include <QPushButton>
 
@@ -128,6 +129,32 @@ public:
     if (button) {
       QObject::connect(button, &QAbstractButton::toggled,
                        [slot_func](bool checked) { slot_func(checked); });
+    }
+  }
+};
+
+class IconSizeChanged : public Signal {
+public:
+  IconSizeChanged(QMainWindow *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QMainWindow *mainWindow = qobject_cast<QMainWindow *>(get_obj());
+    if (mainWindow) {
+      QObject::connect(
+          mainWindow, &QMainWindow::iconSizeChanged,
+          [slot_func](const QSize &iconSize) { slot_func(iconSize); });
+    }
+  }
+};
+
+class ToolButtonStyleChanged : public Signal {
+public:
+  ToolButtonStyleChanged(QMainWindow *obj) : Signal(obj) {}
+  void connect(py::function slot_func) const override {
+    QMainWindow *mainWindow = qobject_cast<QMainWindow *>(get_obj());
+    if (mainWindow) {
+      QObject::connect(
+          mainWindow, &QMainWindow::toolButtonStyleChanged,
+          [slot_func](Qt::ToolButtonStyle style) { slot_func(style); });
     }
   }
 };

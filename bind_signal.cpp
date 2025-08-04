@@ -44,4 +44,11 @@ void bind_signal(py::module_ &m) {
   py::class_<Toggled, Signal>(m, "Toggled").def(py::init([](QPushButton *self) {
     return Toggled(self);
   }));
+
+  py::class_<IconSizeChanged, Signal>(m, "IconSizeChanged")
+      .def(py::init([](QMainWindow *self) { return IconSizeChanged(self); }));
+
+  py::class_<ToolButtonStyleChanged, Signal>(m, "ToolButtonStyleChanged")
+      .def(py::init(
+          [](QMainWindow *self) { return ToolButtonStyleChanged(self); }));
 }

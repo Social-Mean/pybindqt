@@ -116,5 +116,12 @@ void bind_qmainwindow(py::module_ &m) {
       .def("setUnifiedTitleAndToolBarOnMac",
            &QMainWindow::setUnifiedTitleAndToolBarOnMac, py::arg("set"))
 
-      ;
+      // signal
+      .def_property_readonly(
+          "iconSizeChanged",
+          [](QMainWindow *self) { return IconSizeChanged(self); })
+      .def_property_readonly("toolButtonStyleChanged", [](QMainWindow *self) {
+        return ToolButtonStyleChanged(self);
+      });
+  ;
 }
