@@ -1,3 +1,4 @@
 - [ ] 注册 `QString` 到 `py::str` 的自动转换
 - [ ] `QObject` 所有信号的绑定
 - [ ] 读取 UI 文件（uic 或 直接读取）
+- [ ] 整理模块层级，要符合 PyQt 和 PySide 的模块层级
