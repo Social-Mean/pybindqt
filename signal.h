@@ -37,7 +37,7 @@ public:
 
 class CustomContextMenuRequested : public Signal {
 public:
-  CustomContextMenuRequested(QObject *obj) : Signal(obj) {}
+  CustomContextMenuRequested(QWidget *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
     QWidget *widget = qobject_cast<QWidget *>(get_obj());
     if (widget) {
@@ -49,7 +49,7 @@ public:
 
 class WindowIconChanged : public Signal {
 public:
-  WindowIconChanged(QObject *obj) : Signal(obj) {}
+  WindowIconChanged(QWidget *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
     QWidget *widget = qobject_cast<QWidget *>(get_obj());
     if (widget) {
@@ -61,7 +61,7 @@ public:
 
 class WindowIconTextChanged : public Signal {
 public:
-  WindowIconTextChanged(QObject *obj) : Signal(obj) {}
+  WindowIconTextChanged(QWidget *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
     QWidget *widget = qobject_cast<QWidget *>(get_obj());
     if (widget) {
@@ -74,7 +74,7 @@ public:
 
 class WindowTitleChanged : public Signal {
 public:
-  WindowTitleChanged(QObject *obj) : Signal(obj) {}
+  WindowTitleChanged(QWidget *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
     QWidget *widget = qobject_cast<QWidget *>(get_obj());
     if (widget) {
@@ -86,11 +86,11 @@ public:
 
 class Clicked : public Signal {
 public:
-  Clicked(QObject *obj) : Signal(obj) {}
+  Clicked(QAbstractButton *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
-    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
     if (button) {
-      QObject::connect(button, &QPushButton::clicked,
+      QObject::connect(button, &QAbstractButton::clicked,
                        [slot_func](bool checked) { slot_func(checked); });
     }
   }
@@ -98,11 +98,11 @@ public:
 
 class Pressed : public Signal {
 public:
-  Pressed(QObject *obj) : Signal(obj) {}
+  Pressed(QAbstractButton *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
-    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
     if (button) {
-      QObject::connect(button, &QPushButton::pressed,
+      QObject::connect(button, &QAbstractButton::pressed,
                        [slot_func]() { slot_func(); });
     }
   }
@@ -110,11 +110,11 @@ public:
 
 class Released : public Signal {
 public:
-  Released(QObject *obj) : Signal(obj) {}
+  Released(QAbstractButton *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
-    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
     if (button) {
-      QObject::connect(button, &QPushButton::released,
+      QObject::connect(button, &QAbstractButton::released,
                        [slot_func]() { slot_func(); });
     }
   }
@@ -122,11 +122,11 @@ public:
 
 class Toggled : public Signal {
 public:
-  Toggled(QObject *obj) : Signal(obj) {}
+  Toggled(QAbstractButton *obj) : Signal(obj) {}
   void connect(py::function slot_func) const override {
-    QPushButton *button = qobject_cast<QPushButton *>(get_obj());
+    QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
     if (button) {
-      QObject::connect(button, &QPushButton::toggled,
+      QObject::connect(button, &QAbstractButton::toggled,
                        [slot_func](bool checked) { slot_func(checked); });
     }
   }
