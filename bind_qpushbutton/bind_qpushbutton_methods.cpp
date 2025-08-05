@@ -6,16 +6,13 @@
 #include <QPushButton>
 #include <QWidget>
 
-#include "widgets_base.h"
+#include <widgets_base.h>
 
-namespace py = pybind11;
-
-void bind_qpushbutton(py::module_ &m) {
-    py::class_<QPushButton, QAbstractButton>(m, "QPushButton")
-        .def(py::init([](QWidget *parent) {
-                 return std::make_unique<QPushButton>(parent);
-             }),
-             py::arg("parent") = nullptr)
+void bind_qpushbutton_methods(py::class_<QPushButton, QAbstractButton> &cls) {
+    cls.def(py::init([](QWidget *parent) {
+                return std::make_unique<QPushButton>(parent);
+            }),
+            py::arg("parent") = nullptr)
         .def(py::init([](const QString &text, QWidget *parent) {
                  return std::make_unique<QPushButton>(text, parent);
              }),
@@ -32,8 +29,8 @@ void bind_qpushbutton(py::module_ &m) {
         .def("setAutoDefault", &QPushButton::setAutoDefault)
         .def("setDefault", &QPushButton::setDefault)
         .def("setFlat", &QPushButton::setFlat)
-        .def("setMenu", &QPushButton::setMenu);
-
-    //   .def("minimumSizeHint", &QPushButton::minimumSizeHint)
-    //   .def("sizeHint", &QPushButton::sizeHint)
+        .def("setMenu", &QPushButton::setMenu)
+        //   .def("minimumSizeHint", &QPushButton::minimumSizeHint)
+        //   .def("sizeHint", &QPushButton::sizeHint)
+        ;
 }
