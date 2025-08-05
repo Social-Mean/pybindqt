@@ -44,13 +44,18 @@ pybind11_add_module(QtWidgets
     bind_qflags.cpp
     bind_qwidget.cpp
     bind_qapplication.cpp
-    bind_qmainwindow.cpp
     bind_qobject.cpp
     bind_qabstractbutton.cpp
     bind_qpushbutton.cpp
     bind_enum.cpp
     bind_signal.cpp
+    bind_qmainwindow/bind_qmainwindow.cpp
+    bind_qmainwindow/bind_qmainwindow_properties.cpp
+    bind_qmainwindow/bind_qmainwindow_methods.cpp
+    bind_qmainwindow/bind_qmainwindow_signals.cpp
+    bind_qmainwindow/bind_qmainwindow_slots.cpp
 )
+target_include_directories(QtWidgets PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 target_compile_definitions(QtWidgets PRIVATE PYBIND11_DETAILED_ERROR_MESSAGES)
 # Windows 平台特定的部署和生成命令
