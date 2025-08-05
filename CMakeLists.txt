@@ -53,11 +53,11 @@ pybind11_add_module(QtWidgets
     bind_qapplication.cpp
     bind_enum.cpp
     bind_signal.cpp
-    "${BIND_QOBJECT_SOURCES}"
-    "${BIND_QWIDGET_SOURCES}"
-    "${BIND_QMAINWINDOW_SOURCES}"
-    "${BIND_QABSTRACTBUTTON_SOURCES}"
-    "${BIND_QPUSHBUTTON_SOURCES}"
+    ${BIND_QOBJECT_SOURCES}
+    ${BIND_QWIDGET_SOURCES}
+    ${BIND_QMAINWINDOW_SOURCES}
+    ${BIND_QABSTRACTBUTTON_SOURCES}
+    ${BIND_QPUSHBUTTON_SOURCES}
 )
 target_include_directories(QtWidgets PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
