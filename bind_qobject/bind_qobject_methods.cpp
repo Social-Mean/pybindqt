@@ -12,22 +12,16 @@
 #include <QThread>
 #include <QTimer>
 #include <QVariant>
-#include <memory>
 
-#include "widgets_base.h"
+#include <widgets_base.h>
 
 namespace py = pybind11;
 
-void bind_qobject(py::module_ &m) {
-  py::class_<QObject>(m, "QObject")
-      // properties
-      .def_property_readonly("objectName",
-                             [](QObject *self) { return self->objectName(); })
-      // functions
-      .def(py::init([](QObject *parent) {
-             return std::make_unique<QObject>(parent);
-           }),
-           py::arg("parent") = nullptr)
+void bind_qobject_methods(py::class_<QObject> &cls) {
+  cls.def(py::init([](QObject *parent) {
+            return std::make_unique<QObject>(parent);
+          }),
+          py::arg("parent") = nullptr)
       .def("blockSignals", &QObject::blockSignals)
       .def("children", &QObject::children)
       //   .def("connect",
@@ -68,16 +62,5 @@ void bind_qobject(py::module_ &m) {
       .def("startTimer",
            py::overload_cast<int, Qt::TimerType>(&QObject::startTimer),
            py::arg("interval"), py::arg("timerType") = Qt::CoarseTimer)
-      .def("thread", &QObject::thread)
-      // slots
-      .def("deleteLater", &QObject::deleteLater)
-
-      // signals
-      .def_property_readonly("destroyed",
-                             [](QObject *self) { return Destroyed(self); })
-      .def_property_readonly("objectNameChanged", [](QObject *self) {
-        return ObjectNameChanged(self)
-
-            ;
-      });
+      .def("thread", &QObject::thread);
 }

@@ -40,6 +40,7 @@ message(STATUS "Qt5 found: ${Qt5_FOUND}")
 # link_directories(${Python3_LIBRARIES}/python38.lib)
 # link_libraries(${Python3_LIBRARIES})
 
+add_subdirectory(bind_qobject)
 add_subdirectory(bind_qmainwindow)
 
 pybind11_add_module(QtWidgets
@@ -48,11 +49,11 @@ pybind11_add_module(QtWidgets
     bind_qflags.cpp
     bind_qwidget.cpp
     bind_qapplication.cpp
-    bind_qobject.cpp
     bind_qabstractbutton.cpp
     bind_qpushbutton.cpp
     bind_enum.cpp
     bind_signal.cpp
+    "${BIND_QOBJECT_SOURCES}"
     "${BIND_QMAINWINDOW_SOURCES}"
 )
 target_include_directories(QtWidgets PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
