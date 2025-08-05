@@ -31,12 +31,14 @@ find_package(pybind11 CONFIG REQUIRED HINTS "${VENV_SITE_PACKAGES}")
 find_package(Qt5 EXACT 5.15.2 QUIET COMPONENTS Core Gui Widgets)
 
 message(STATUS "Python executable: ${Python3_EXECUTABLE}")
-message(STATUS "Python library: ${Python3_INCLUDE_DIRS}")
+message(STATUS "Python include: ${Python3_INCLUDE_DIRS}")
+message(STATUS "Python library: ${Python3_LIBRARIES}")
 message(STATUS "Virtual environment site-packages: ${VENV_SITE_PACKAGES}")
 message(STATUS "Qt5 found: ${Qt5_FOUND}")
 
-include_directories(${Python3_INCLUDE_DIRS})
-link_directories(${Python3_LIBRARIES}/python38.lib)
+# include_directories(${Python3_INCLUDE_DIRS})
+# link_directories(${Python3_LIBRARIES}/python38.lib)
+# link_libraries(${Python3_LIBRARIES})
 
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
@@ -58,6 +60,8 @@ pybind11_add_module(QtWidgets
 target_include_directories(QtWidgets PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
 target_compile_definitions(QtWidgets PRIVATE PYBIND11_DETAILED_ERROR_MESSAGES)
+
+
 # Windows 平台特定的部署和生成命令
 if(WIN32)
     # 先从环境变量 QTDIR 获取 windeployqt.exe 路径
@@ -89,8 +93,4 @@ if(WIN32)
         COMMENT "编译后自动生成 QtWidgets 的 stub 文件"
     )
 endif()
-
-
-
-
 
