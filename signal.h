@@ -1,11 +1,5 @@
 #pragma once
 
-#include <pybind11/pybind11.h>
-
-#include <QMainWindow>
-#include <QObject>
-#include <QPushButton>
-
 namespace py = pybind11;
 
 class Signal {

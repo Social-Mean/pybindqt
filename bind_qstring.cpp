@@ -1,8 +1,3 @@
-#include <pybind11/pybind11.h>
-
-#include <QByteArray>
-#include <QString>
-
 #include "widgets_base.h"
 
 namespace py = pybind11;

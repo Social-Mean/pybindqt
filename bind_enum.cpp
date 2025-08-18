@@ -1,7 +1,3 @@
-#include <pybind11/pybind11.h>
-
-#include <QTimer>
-
 #include "widgets_base.h"
 
 namespace py = pybind11;

@@ -1,9 +1,5 @@
 #pragma once
 
-#include <pybind11/pybind11.h>
-
-#include <QString>
-
 namespace py = pybind11;
 
 // QString 和 Python str 相互转换

@@ -1,5 +1,4 @@
 #pragma once
-#include <pybind11/pybind11.h>
 
 #include "qstring_converter.h"
 #include "signal.h"

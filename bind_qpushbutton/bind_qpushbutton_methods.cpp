@@ -1,11 +1,3 @@
-#include <pybind11/pybind11.h>
-
-#include <QButtonGroup>
-#include <QMenu>
-#include <QObject>
-#include <QPushButton>
-#include <QWidget>
-
 #include <widgets_base.h>
 
 void bind_qpushbutton_methods(py::class_<QPushButton, QAbstractButton> &cls) {

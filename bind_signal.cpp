@@ -1,5 +1,3 @@
-#include <pybind11/pybind11.h>
-
 #include "widgets_base.h"
 
 namespace py = pybind11;

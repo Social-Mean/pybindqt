@@ -1,15 +1,3 @@
-#include <pybind11/pybind11.h>
-
-#include <QDockWidget>
-#include <QMainWindow>
-#include <QMenu>
-#include <QMenuBar>
-#include <QStatusBar>
-#include <QString>
-#include <QToolBar>
-#include <QWidget>
-#include <Qt>
-
 #include <widgets_base.h>
 
 namespace py = pybind11;
