@@ -90,7 +90,7 @@ if(WIN32)
     add_custom_command(
         TARGET QtWidgets POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E echo "windeployqt..."
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets>
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets> > NUL 2>&1
         COMMENT "编译后自动运行 windeployqt 部署 QtWidgets"
     )
 
