@@ -59,7 +59,7 @@ pybind11_add_module(QtWidgets
     bind_qflags.cpp
     bind_qapplication.cpp
     bind_enum.cpp
-    bind_signal.cpp
+    pybindqt/bind_signal.cpp
     ${BIND_QOBJECT_SOURCES}
     ${BIND_QWIDGET_SOURCES}
     ${BIND_QMAINWINDOW_SOURCES}

@@ -5,3 +5,5 @@
 #include <QtWidgets>
 #include <QtCore>
 #include <QtGui>
+
+#include "signal.h"
