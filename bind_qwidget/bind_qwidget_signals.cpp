@@ -5,45 +5,36 @@ namespace py = pybind11;
 class CustomContextMenuRequested : public Signal {
     PBQ_SIGNAL(CustomContextMenuRequested, QWidget)
     void connect(py::function slot_func) const override {
-        QWidget *widget = qobject_cast<QWidget *>(get_obj());
-        if (widget) {
-            QObject::connect(widget, &QWidget::customContextMenuRequested,
-                             [slot_func](const QPoint &pos) { slot_func(pos); });
-        }
+        auto *obj = qobject_cast<QWidget *>(get_obj());
+        QObject::connect(obj, &QWidget::customContextMenuRequested,
+                         [slot_func](const QPoint &pos) { slot_func(pos); });
     }
 };
 
 class WindowIconChanged : public Signal {
     PBQ_SIGNAL(WindowIconChanged, QWidget)
     void connect(py::function slot_func) const override {
-        QWidget *widget = qobject_cast<QWidget *>(get_obj());
-        if (widget) {
-            QObject::connect(widget, &QWidget::windowIconChanged,
-                             [slot_func](const QIcon &icon) { slot_func(icon); });
-        }
+        auto *obj = qobject_cast<QWidget *>(get_obj());
+        QObject::connect(obj, &QWidget::windowIconChanged,
+                         [slot_func](const QIcon &icon) { slot_func(icon); });
     }
 };
 
 class WindowIconTextChanged : public Signal {
     PBQ_SIGNAL(WindowIconTextChanged, QWidget)
     void connect(py::function slot_func) const override {
-        QWidget *widget = qobject_cast<QWidget *>(get_obj());
-        if (widget) {
-            QObject::connect(
-                widget, &QWidget::windowIconTextChanged,
-                [slot_func](const QString &iconText) { slot_func(iconText); });
-        }
+        auto *obj = qobject_cast<QWidget *>(get_obj());
+        QObject::connect(obj, &QWidget::windowIconTextChanged,
+                         [slot_func](const QString &iconText) { slot_func(iconText); });
     }
 };
 
 class WindowTitleChanged : public Signal {
     PBQ_SIGNAL(WindowTitleChanged, QWidget)
     void connect(py::function slot_func) const override {
-        QWidget *widget = qobject_cast<QWidget *>(get_obj());
-        if (widget) {
-            QObject::connect(widget, &QWidget::windowTitleChanged,
-                             [slot_func](const QString &title) { slot_func(title); });
-        }
+        auto *obj = qobject_cast<QWidget *>(get_obj());
+        QObject::connect(obj, &QWidget::windowTitleChanged,
+                         [slot_func](const QString &title) { slot_func(title); });
     }
 };
 
