@@ -18,6 +18,12 @@ pybindqt/pbq_pch.h
 
 link_libraries(pbq_pch_interface)
 
+
+find_package(Boost REQUIRED)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+endif()
+
 # 设置虚拟环境路径
 set(VENV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.venv")
 set(VENV_PYTHON "${VENV_DIR}/Scripts/python.exe")
