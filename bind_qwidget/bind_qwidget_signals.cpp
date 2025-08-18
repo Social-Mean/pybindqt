@@ -3,10 +3,7 @@
 namespace py = pybind11;
 
 class CustomContextMenuRequested : public Signal {
-public:
-    CustomContextMenuRequested(QWidget *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(CustomContextMenuRequested, QWidget)
     void connect(py::function slot_func) const override {
         QWidget *widget = qobject_cast<QWidget *>(get_obj());
         if (widget) {
@@ -17,10 +14,7 @@ public:
 };
 
 class WindowIconChanged : public Signal {
-public:
-    WindowIconChanged(QWidget *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(WindowIconChanged, QWidget)
     void connect(py::function slot_func) const override {
         QWidget *widget = qobject_cast<QWidget *>(get_obj());
         if (widget) {
@@ -31,10 +25,7 @@ public:
 };
 
 class WindowIconTextChanged : public Signal {
-public:
-    WindowIconTextChanged(QWidget *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(WindowIconTextChanged, QWidget)
     void connect(py::function slot_func) const override {
         QWidget *widget = qobject_cast<QWidget *>(get_obj());
         if (widget) {
@@ -46,10 +37,7 @@ public:
 };
 
 class WindowTitleChanged : public Signal {
-public:
-    WindowTitleChanged(QWidget *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(WindowTitleChanged, QWidget)
     void connect(py::function slot_func) const override {
         QWidget *widget = qobject_cast<QWidget *>(get_obj());
         if (widget) {
@@ -60,30 +48,6 @@ public:
 };
 
 void bind_qwidget_signals(py::class_<QWidget, QObject> &cls) {
-    py::class_<CustomContextMenuRequested, Signal>(cls,
-                                                   "CustomContextMenuRequested")
-        .def(py::init(
-            [](QWidget *self) { return CustomContextMenuRequested(self); }));
-
-    py::class_<WindowIconChanged, Signal>(cls, "WindowIconChanged")
-        .def(py::init([](QWidget *self) { return WindowIconChanged(self); }));
-
-    py::class_<WindowIconTextChanged, Signal>(cls, "WindowIconTextChanged")
-        .def(py::init([](QWidget *self) { return WindowIconTextChanged(self); }));
-
-    py::class_<WindowTitleChanged, Signal>(cls, "WindowTitleChanged")
-        .def(py::init([](QWidget *self) { return WindowTitleChanged(self); }));
-
-    cls.def_property_readonly(
-           "customContextMenuRequested",
-           [](QWidget *self) { return CustomContextMenuRequested(self); })
-        .def_property_readonly(
-            "windowIconChanged",
-            [](QWidget *self) { return WindowIconChanged(self); })
-        .def_property_readonly(
-            "windowIconTextChanged",
-            [](QWidget *self) { return WindowIconTextChanged(self); })
-        .def_property_readonly(
-            "windowTitleChanged",
-            [](QWidget *self) { return WindowTitleChanged(self); });
+    PBQ_BIND_SIGNAL(QWidget, CustomContextMenuRequested, WindowIconChanged,
+                    WindowIconTextChanged, WindowTitleChanged);
 }

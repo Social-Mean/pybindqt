@@ -3,10 +3,7 @@
 namespace py = pybind11;
 
 class Clicked : public Signal {
-public:
-    Clicked(QAbstractButton *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(Clicked, QAbstractButton)
     void connect(py::function slot_func) const override {
         QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
         if (button) {
@@ -17,10 +14,7 @@ public:
 };
 
 class Pressed : public Signal {
-public:
-    Pressed(QAbstractButton *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(Pressed, QAbstractButton)
     void connect(py::function slot_func) const override {
         QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
         if (button) {
@@ -31,10 +25,7 @@ public:
 };
 
 class Released : public Signal {
-public:
-    Released(QAbstractButton *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(Released, QAbstractButton)
     void connect(py::function slot_func) const override {
         QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
         if (button) {
@@ -45,10 +36,7 @@ public:
 };
 
 class Toggled : public Signal {
-public:
-    Toggled(QAbstractButton *obj) :
-        Signal(obj) {
-    }
+    PBQ_SIGNAL(Toggled, QAbstractButton)
     void connect(py::function slot_func) const override {
         QAbstractButton *button = qobject_cast<QAbstractButton *>(get_obj());
         if (button) {
@@ -59,27 +47,6 @@ public:
 };
 
 void bind_qabstractbutton_signals(py::class_<QAbstractButton, QWidget> &cls) {
-    py::class_<Clicked, Signal>(cls, "Clicked").def(py::init([](QPushButton *self) {
-        return Clicked(self);
-    }));
-
-    py::class_<Pressed, Signal>(cls, "Pressed").def(py::init([](QPushButton *self) {
-        return Pressed(self);
-    }));
-
-    py::class_<Released, Signal>(cls, "Released")
-        .def(py::init([](QPushButton *self) { return Released(self); }));
-
-    py::class_<Toggled, Signal>(cls, "Toggled").def(py::init([](QPushButton *self) {
-        return Toggled(self);
-    }));
-
-    cls.def_property_readonly(
-           "clicked", [](QAbstractButton *self) { return Clicked(self); })
-        .def_property_readonly(
-            "pressed", [](QAbstractButton *self) { return Pressed(self); })
-        .def_property_readonly(
-            "released", [](QAbstractButton *self) { return Released(self); })
-        .def_property_readonly(
-            "toggled", [](QAbstractButton *self) { return Toggled(self); });
+    PBQ_BIND_SIGNAL(QAbstractButton,
+                    Clicked, Pressed, Released, Toggled);
 }
