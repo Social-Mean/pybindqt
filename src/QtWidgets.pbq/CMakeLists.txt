@@ -1,10 +1,10 @@
 project(QtWidgets)
 
-add_subdirectory(bind_qobject)
-add_subdirectory(bind_qwidget)
-add_subdirectory(bind_qmainwindow)
-add_subdirectory(bind_qabstractbutton)
-add_subdirectory(bind_qpushbutton)
+add_subdirectory(QWidget.pbq)
+add_subdirectory(QAbstractButton.pbq)
+add_subdirectory(QMainWindow.pbq)
+add_subdirectory(QObject.pbq)
+add_subdirectory(QPushButton.pbq)
 
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
