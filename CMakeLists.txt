@@ -63,7 +63,7 @@ message(STATUS "Qt5 found: ${Qt5_FOUND}")
 # link_directories(${Python3_LIBRARIES}/python38.lib)
 # link_libraries(${Python3_LIBRARIES})
 
-add_subdirectory(src/QtCore)
+add_subdirectory(src/QtCore.pbq)
 add_subdirectory(src/QtWidgets.pbq)
 
 
