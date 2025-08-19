@@ -1,4 +1,4 @@
-from . import QtCore
+from . import QtCore  # 必须先 import QtCore
 from . import QtWidgets
 # from . import QtGui
 
