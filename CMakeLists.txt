@@ -28,6 +28,8 @@ target_precompile_headers(pbq_pch_interface INTERFACE
 
 link_libraries(pbq_pch_interface)
 
+add_compile_definitions(PYBIND11_DETAILED_ERROR_MESSAGES)
+
 
 find_package(Boost REQUIRED)
 if(Boost_FOUND)
