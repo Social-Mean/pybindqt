@@ -64,30 +64,7 @@ message(STATUS "Qt5 found: ${Qt5_FOUND}")
 # link_libraries(${Python3_LIBRARIES})
 
 add_subdirectory(src/QtCore)
-
-add_subdirectory(src/QtWidgets.pbq/bind_qobject)
-add_subdirectory(src/QtWidgets.pbq/bind_qwidget)
-add_subdirectory(src/QtWidgets.pbq/bind_qmainwindow)
-add_subdirectory(src/QtWidgets.pbq/bind_qabstractbutton)
-add_subdirectory(src/QtWidgets.pbq/bind_qpushbutton)
-
-pybind11_add_module(QtWidgets
-    src/qtwidgets.cpp
-    # src/qstring_converter.cpp
-    src/bind_qstring.cpp
-    src/bind_qflags.cpp
-    src/bind_qapplication.cpp
-    src/bind_enum.cpp
-    src/bind_signal.cpp
-    ${BIND_QOBJECT_SOURCES}
-    ${BIND_QWIDGET_SOURCES}
-    ${BIND_QMAINWINDOW_SOURCES}
-    ${BIND_QABSTRACTBUTTON_SOURCES}
-    ${BIND_QPUSHBUTTON_SOURCES}
-)
-target_include_directories(QtWidgets PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(QtWidgets PRIVATE Qt5::Core Qt5::Gui Qt5::Widgets)
-target_compile_definitions(QtWidgets PRIVATE PYBIND11_DETAILED_ERROR_MESSAGES)
+add_subdirectory(src/QtWidgets.pbq)
 
 
 # Windows 平台特定的部署和生成命令
@@ -99,26 +76,5 @@ if(WIN32)
         message(FATAL_ERROR "环境变量 QTDIR 未设置，无法找到 windeployqt.exe")
     endif()
 
-    # 获取 QtWidgets 模块的实际输出文件名
-    get_target_property(QTWIDGETS_OUTPUT_NAME QtWidgets OUTPUT_NAME)
-    if(NOT QTWIDGETS_OUTPUT_NAME)
-        set(QTWIDGETS_OUTPUT_NAME "QtWidgets")
-    endif()
-
-    # 部署 QtWidgets
-    add_custom_command(
-        TARGET QtWidgets POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E echo "windeployqt..."
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets> > NUL 2>&1
-        COMMENT "编译后自动运行 windeployqt 部署 QtWidgets"
-    )
-
-    # 生成 stub 文件
-    add_custom_command(
-        TARGET QtWidgets POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E echo "生成 stub 文件..."
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} uv run stubgen -p QtWidgets --include-docstrings -o .
-        COMMENT "编译后自动生成 QtWidgets 的 stub 文件"
-    )
 endif()
 
