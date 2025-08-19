@@ -86,3 +86,10 @@ add_custom_target(generate_stub ALL
     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtCore> > NUL 2>&1
     COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}" ${STUBGEN_COMMAND}  
 )
+
+
+set(RUN_COMMAND ${UV_EXECUTABLE} run ./test.py)
+
+add_custom_target(run 
+    COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}" ${RUN_COMMAND}  
+)
