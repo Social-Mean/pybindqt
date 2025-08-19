@@ -1,16 +1,14 @@
 namespace py = pybind11;
 
+void bind_qapplication_properties(py::class_<QApplication, QGuiApplication> &cls);
+void bind_qapplication_methods(py::class_<QApplication, QGuiApplication> &cls);
+void bind_qapplication_slots(py::class_<QApplication, QGuiApplication> &cls);
+void bind_qapplication_signals(py::class_<QApplication, QGuiApplication> &cls);
+
 void bind_qapplication(py::module_ &m) {
-    py::class_<QApplication>(m, "QApplication")
-        .def(py::init([](py::list args) {
-            std::vector<QByteArray> argData;
-            std::vector<char *> argPtrs;
-            for (auto item : args) {
-                argData.emplace_back(py::str(item).cast<std::string>().c_str());
-                argPtrs.push_back(const_cast<char *>(argData.back().data()));
-            }
-            int argc = static_cast<int>(argPtrs.size());
-            return std::make_unique<QApplication>(argc, argPtrs.data());
-        }))
-        .def("exec_", [](QApplication &self) { return self.exec(); });
+    auto cls = py::class_<QApplication, QGuiApplication>(m, "QApplication");
+    bind_qapplication_properties(cls);
+    bind_qapplication_methods(cls);
+    bind_qapplication_slots(cls);
+    bind_qapplication_signals(cls);
 }
