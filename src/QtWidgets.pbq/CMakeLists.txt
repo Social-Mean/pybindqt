@@ -4,10 +4,11 @@ add_subdirectory(QWidget.pbq)
 add_subdirectory(QAbstractButton.pbq)
 add_subdirectory(QMainWindow.pbq)
 add_subdirectory(QPushButton.pbq)
+add_subdirectory(QApplication.pbq)
 
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
-    bind_qapplication.cpp
+    ${BIND_QAPPLICATION_SOURCES}
     ${BIND_QWIDGET_SOURCES}
     ${BIND_QMAINWINDOW_SOURCES}
     ${BIND_QABSTRACTBUTTON_SOURCES}
