@@ -7,3 +7,4 @@
 #include <QtGui>
 
 #include "signal.h"
+#include "qstring_converter.h"
