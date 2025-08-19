@@ -75,6 +75,12 @@ if(WIN32)
     else()
         message(FATAL_ERROR "环境变量 QTDIR 未设置，无法找到 windeployqt.exe")
     endif()
-
 endif()
 
+find_program(UV_EXECUTABLE uv)
+set(STUBGEN_COMMAND ${UV_EXECUTABLE} run stubgen -p pybindqt --include-docstrings -o .)
+
+add_custom_target(generate_stub ALL
+    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtCore> > NUL 2>&1
+    COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_SOURCE_DIR}" ${STUBGEN_COMMAND}  
+)
