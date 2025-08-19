@@ -8,18 +8,18 @@ def main():
         sys.exit(1)
 
     class_name = sys.argv[1]
-    folder_name = f"bind_{class_name.lower()}"
+    folder_name = f"{class_name}.pbq"
     if os.path.exists(folder_name):
         print(f"文件夹 '{folder_name}' 已经存在，未进行新建操作。")
         sys.exit(0)
 
     os.makedirs(folder_name)
     filenames = [
-        f"{folder_name}.cpp",
-        f"{folder_name}_properties.cpp",
-        f"{folder_name}_methods.cpp",
-        f"{folder_name}_slots.cpp",
-        f"{folder_name}_signals.cpp",
+        f"{class_name}.pbq.cpp",
+        f"{class_name}.properties.cpp",
+        f"{class_name}.methods.cpp",
+        f"{class_name}.slots.cpp",
+        f"{class_name}.signals.cpp",
         "CMakeLists.txt",
     ]
 
