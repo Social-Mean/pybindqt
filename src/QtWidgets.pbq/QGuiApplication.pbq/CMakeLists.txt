@@ -1,0 +1,7 @@
+project(bind_qguiapplication)
+
+file(GLOB BIND_QGUIAPPLICATION_SOURCES
+    CONFIGURE_DEPENDS  # 重要：当添加新文件时自动重新生成 build system
+    "*.cpp"
+)
+set(BIND_QGUIAPPLICATION_SOURCES ${BIND_QGUIAPPLICATION_SOURCES} PARENT_SCOPE)
