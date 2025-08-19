@@ -49,18 +49,19 @@ void bind_qcoreapplication_methods(py::class_<QCoreApplication, QObject> &cls) {
     cls.def_static("libraryPaths", &QCoreApplication::libraryPaths);
     cls.def_static("organizationDomain", &QCoreApplication::organizationDomain);
     cls.def_static("organizationName", &QCoreApplication::organizationName);
-    cls.def_static(
-        "postEvent",
-        py::overload_cast<QObject *, QEvent *, int>(&QCoreApplication::postEvent),
-        py::arg("receiver"), py::arg("event"), py::arg("priority") = Qt::NormalEventPriority);
-    cls.def_static(
-        "processEvents",
-        py::overload_cast<QEventLoop::ProcessEventsFlags>(&QCoreApplication::processEvents),
-        py::arg("flags") = QEventLoop::AllEvents);
-    cls.def_static(
-        "processEvents",
-        py::overload_cast<QEventLoop::ProcessEventsFlags, int>(&QCoreApplication::processEvents),
-        py::arg("flags"), py::arg("ms"));
+    // TODO
+    // cls.def_static(
+    //     "postEvent",
+    //     py::overload_cast<QObject *, QEvent *, int>(&QCoreApplication::postEvent),
+    //     py::arg("receiver"), py::arg("event"), py::arg("priority") = Qt::NormalEventPriority);
+    // cls.def_static(
+    //     "processEvents",
+    //     py::overload_cast<QEventLoop::ProcessEventsFlags>(&QCoreApplication::processEvents),
+    //     py::arg("flags") = QEventLoop::AllEvents);
+    // cls.def_static(
+    //     "processEvents",
+    //     py::overload_cast<QEventLoop::ProcessEventsFlags, int>(&QCoreApplication::processEvents),
+    //     py::arg("flags"), py::arg("ms"));
     cls.def_static("removeLibraryPath", &QCoreApplication::removeLibraryPath, py::arg("path"));
     cls.def_static(
         "removePostedEvents",
