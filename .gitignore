@@ -16,3 +16,9 @@ wheels/
 .VSCodeCounter
 
 out/
+
+pybindqt/**/*.dll
+pybindqt/**/*.qm
+pybindqt/**/*.exe
+pybindqt/**/*.pyd
+pybindqt/**/*.pyi

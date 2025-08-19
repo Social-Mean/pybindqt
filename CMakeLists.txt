@@ -11,9 +11,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/pybindqt)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pybindqt)
+# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pybindqt)
+
+message(STATUS "CMAKE_LIBRARY_OUTPUT_DIRECTORY: ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
+message(STATUS "CMAKE_RUNTIME_OUTPUT_DIRECTORY: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
+message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIRECTORY: ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}")
+
+
+
 add_library(pbq_pch_interface INTERFACE)
 target_precompile_headers(pbq_pch_interface INTERFACE
-pybindqt/pbq_pch.h
+    src/pbq_pch.h
 )
 
 link_libraries(pbq_pch_interface)
@@ -65,7 +75,7 @@ pybind11_add_module(QtWidgets
     bind_qflags.cpp
     bind_qapplication.cpp
     bind_enum.cpp
-    pybindqt/bind_signal.cpp
+    src/bind_signal.cpp
     ${BIND_QOBJECT_SOURCES}
     ${BIND_QWIDGET_SOURCES}
     ${BIND_QMAINWINDOW_SOURCES}
@@ -96,7 +106,7 @@ if(WIN32)
     add_custom_command(
         TARGET QtWidgets POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E echo "windeployqt..."
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets> > NUL 2>&1
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${WINDEPLOYQT_EXE} $<TARGET_FILE_NAME:QtWidgets> > NUL 2>&1
         COMMENT "编译后自动运行 windeployqt 部署 QtWidgets"
     )
 
@@ -104,7 +114,7 @@ if(WIN32)
     add_custom_command(
         TARGET QtWidgets POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E echo "生成 stub 文件..."
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_BINARY_DIR} uv run stubgen -p QtWidgets --include-docstrings -o .
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} uv run stubgen -p QtWidgets --include-docstrings -o .
         COMMENT "编译后自动生成 QtWidgets 的 stub 文件"
     )
 endif()
