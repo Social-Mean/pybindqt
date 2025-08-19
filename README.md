@@ -4,7 +4,7 @@ PyBindQt is another C++/Qt binding for Python, similar to PyQt and PySide.
 
 ## ❓ Why Another Python Qt Binding?
 
-PyQt and PySide are definitely excellent Python Qt bindings. 
+[PyQt](https://riverbankcomputing.com/software/pyqt/intro) and [PySide](https://wiki.qt.io/Qt_for_Python) are definitely excellent Python Qt bindings. 
 Many programmers have used them to create excellent applications.
 
 However, the process of exporting custom C++ Qt widgets to PyQt or PySide is very difficult. 
