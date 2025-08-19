@@ -1,5 +1,3 @@
-#include "widgets_base.h"
-
 namespace py = pybind11;
 
 void bind_signal(py::module_ &m) {

@@ -6,5 +6,5 @@
 #include <QtCore>
 #include <QtGui>
 
-#include "signal.h"
-#include "qstring_converter.h"
+#include "QtCore.pbq/signal.h"
+#include "QtCore.pbq/qstring_converter.h"

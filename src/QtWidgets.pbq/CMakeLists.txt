@@ -8,12 +8,11 @@ add_subdirectory(bind_qpushbutton)
 
 pybind11_add_module(QtWidgets
     qtwidgets.cpp
-    # src/qstring_converter.cpp
-    bind_qstring.cpp
-    bind_qflags.cpp
+    # bind_qstring.cpp
+    # bind_qflags.cpp
     bind_qapplication.cpp
-    bind_enum.cpp
-    bind_signal.cpp
+    # bind_enum.cpp
+    # bind_signal.cpp
     ${BIND_QOBJECT_SOURCES}
     ${BIND_QWIDGET_SOURCES}
     ${BIND_QMAINWINDOW_SOURCES}
