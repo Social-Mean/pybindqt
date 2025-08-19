@@ -1,0 +1,7 @@
+project(bind_qcoreapplication)
+
+file(GLOB BIND_QCOREAPPLICATION_SOURCES
+    CONFIGURE_DEPENDS  # 重要：当添加新文件时自动重新生成 build system
+    "*.cpp"
+)
+set(BIND_QCOREAPPLICATION_SOURCES ${BIND_QCOREAPPLICATION_SOURCES} PARENT_SCOPE)
