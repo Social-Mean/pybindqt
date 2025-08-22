@@ -9,6 +9,7 @@ pybind11_add_module(QtCore
     bind_qstring.cpp
     bind_enum.cpp
     bind_signal.cpp
+    QPoint.pbq.cpp
     ${BIND_QOBJECT_SOURCES}
 )
 
