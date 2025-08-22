@@ -9,6 +9,7 @@ public:
     Signal(QObject *obj) {
         m_obj = obj;
     }
+    virtual ~Signal() = default;
     virtual void connect(py::function slot_func) const {
         throw std::runtime_error("Not implemented");
     }
