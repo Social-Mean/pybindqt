@@ -7,6 +7,18 @@ if(MSVC)
     add_compile_options(/utf-8)
 endif()
 
+# 极其不推荐的做法！
+if(MSVC)
+    # 强制链接器忽略多重定义
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:MULTIPLE")
+    
+    # 或者忽略未解析符号
+    # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /FORCE:UNRESOLVED")
+    
+    # 禁用增量链接
+    # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /INCREMENTAL:NO")
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -64,6 +76,8 @@ message(STATUS "Qt5 found: ${Qt5_FOUND}")
 # include_directories(${Python3_INCLUDE_DIRS})
 # link_directories(${Python3_LIBRARIES}/python38.lib)
 # link_libraries(${Python3_LIBRARIES})
+
+include_directories(include)
 
 add_subdirectory(src/QtCore.pbq)
 add_subdirectory(src/QtWidgets.pbq)
